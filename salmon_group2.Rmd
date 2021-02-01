@@ -11,8 +11,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Tab 1: Original time series {.tabset}
+# Overview {.tabset}
 
-# Tab 2: Seasonplots {.tabset}
+## Tab 1: Original time series
 
-# Tab 3: Annual counts by species {.tabset}
+## Tab 2: Seasonplots
+
+## Tab 3: Annual counts by species
