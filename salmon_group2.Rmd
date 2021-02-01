@@ -5,6 +5,7 @@ date: "2/1/2021"
 output: 
   html_document:
     theme: yeti
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -18,3 +19,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Tab 2: Seasonplots
 
 ## Tab 3: Annual counts by species
+
+```{r}
+
+```
+
