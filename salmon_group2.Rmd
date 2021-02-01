@@ -2,13 +2,15 @@
 title: "salmon_group2"
 author: "Haley Grant, Dina Arch, Rachel Rhodes"
 date: "2/1/2021"
-output: 
-  html_document:
-    theme: yeti
+output:
+  prettydoc::html_pretty:
+    theme: hpstr
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(prettydoc)
+
 ```
 
 # Overview {.tabset}
