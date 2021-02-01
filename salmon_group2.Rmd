@@ -5,6 +5,7 @@ date: "2/1/2021"
 output:
   prettydoc::html_pretty:
     theme: hpstr
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -20,3 +21,8 @@ library(prettydoc)
 ## Tab 2: Seasonplots
 
 ## Tab 3: Annual counts by species
+
+```{r}
+
+```
+
