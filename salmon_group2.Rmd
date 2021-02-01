@@ -3,24 +3,23 @@ title: "salmon_group2"
 author: "Haley Grant, Dina Arch, Rachel Rhodes"
 date: "2/1/2021"
 output:
-  prettydoc::html_pretty:
-    theme: hpstr
-  code_folding: hide
+  html_document:
+    code_folding: hide
+    toc: true
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(prettydoc)
-
 ```
 
 # Overview {.tabset}
 
-## Tab 1: Original time series
+## Original time series 
 
-## Tab 2: Seasonplots
+## Seasonplots
 
-## Tab 3: Annual counts by species
+## Annual counts by species
 
 ```{r}
 
