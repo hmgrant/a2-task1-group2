@@ -1,8 +1,10 @@
 ---
 title: "salmon_group2"
-author: "Haley Grant"
+author: "Haley Grant, Dina Arch, Rachel Rhodes"
 date: "2/1/2021"
-output: html_document
+output: 
+  html_document:
+    theme: yeti
 ---
 
 ```{r setup, include=FALSE}
