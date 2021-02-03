@@ -3,9 +3,10 @@ title: "salmon_group2"
 author: "Haley Grant, Dina Arch, Rachel Rhodes"
 date: "2/1/2021"
 output:
-  prettydoc::html_pretty:
-    theme: hpstr
-  code_folding: hide
+  html_document:
+    code_folding: hide
+    toc: true
+    css: style.css
 ---
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
@@ -24,7 +25,7 @@ library(viridis)
 
 # Overview {.tabset}
 
-## Tab 1: Original time series
+## Tab 1: Original time series 
 
 ## Tab 2: Seasonplots
 
