@@ -1,10 +1,11 @@
 ---
-title: "salmon_group2"
+title: "Adult Fish Passage at the Willamette Falls"
+subtitle: "Group 2"
 author: "Haley Grant, Dina Arch, Rachel Rhodes"
 date: "2/1/2021"
 output:
   html_document:
-    code_folding: hide
+    code_folding: show
     toc: true
     css: style.css
 ---
@@ -24,12 +25,59 @@ library(viridis)
 ```
 
 # Overview {.tabset}
+  Here is an engaging image!
+  
+  Here is a brief summary!
+  
+  Here is a map of the fish ladder location!
+  
+  Here is a professionally formatted data citation!
 
 ## Tab 1: Original time series 
 
+As shown in the figure below: 
+
+ *  Steelhead salmon had a large presence in 2001 (approx. 400 fish per day), while Coho and Jack Coho salmon did not appear in the passage during 2001 (zero fish per day).
+ *  The recorded number of Coho fish increased as time increased, with the most recorded Coho salmon in 2010.
+ *  There is a constant trended in the recorded number of Jack Coho, except for a peak in late 2008. 
+ *  All three fish seem to have a seasonal trend, where some months have more recorded salmon than others. For example, more Steelhead salmon are found during the Spring months. 
+```{r,  message=FALSE, warning=FALSE}
+original_ts <- read_csv(here("data","willamette_fish_passage.csv")) %>% 
+  clean_names() %>% 
+  select(coho, jack_coho, steelhead, date) %>%
+  replace(is.na(.), 0) %>% 
+  mutate(date = mdy(date)) %>% 
+  as_tsibble(key = NULL, index = date)
+
+static_coho <- original_ts %>% 
+  ggplot(aes(x = date, y = coho)) +
+  labs(subtitle = 'Coho', x ='', y='') +
+  geom_line() +
+  theme_dark()
+
+static_jackcoho <- original_ts %>% 
+  ggplot(aes(x = date, y = jack_coho)) +
+  labs(subtitle = 'Jack Coho', x ='', y='') +
+  geom_line() +
+  theme_dark()
+
+static_steelhead <- original_ts %>% 
+  ggplot(aes(x = date, y = steelhead)) +
+  labs(subtitle = 'Steelhead', x ='', y='') +
+  geom_line() +
+  theme_dark()
+
+
+(static_coho / static_jackcoho / static_steelhead) +
+  plot_layout(guides = 'collect') +
+  plot_annotation(title = 'Species Counts at Willamette Falls (2001-2010)', subtitle = 'Adult Passage (fish/day)', caption = 'Figure 1. Static graph of passage recorded for Coho, Jack Coho, and Steelhead salmon.') 
+  
+```
+
+
 ## Tab 2: Seasonplots
 
-```{r}
+```{r, warning=FALSE, message = FALSE}
 seasonplot_ts <- read_csv(here("data","willamette_fish_passage.csv")) %>% 
   clean_names() %>% 
   select(coho, jack_coho, steelhead, date, temp_c) %>%
