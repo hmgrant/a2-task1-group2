@@ -8,10 +8,18 @@ output:
   code_folding: hide
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(prettydoc)
-
+library(tidyverse)
+library(dplyr)
+library(here)
+library(janitor)
+library(lubridate)
+library(tsibble)
+library(feasts)
+library(patchwork)
+library(viridis)
 ```
 
 # Overview {.tabset}
@@ -20,9 +28,43 @@ library(prettydoc)
 
 ## Tab 2: Seasonplots
 
-## Tab 3: Annual counts by species
-
 ```{r}
+seasonplot_ts <- read_csv(here("data","willamette_fish_passage.csv")) %>% 
+  clean_names() %>% 
+  select(coho, jack_coho, steelhead, date, temp_c) %>%
+  mutate(date = mdy(date)) %>% 
+  as_tsibble(key = NULL, index = date)
 
+seasonplot_week <- seasonplot_ts %>% 
+  index_by(yr_wk = ~yearweek((.))) %>% 
+  summarize(weekly_steelhead_counts = mean(steelhead), weekly_coho_counts = mean(coho), weekly_jack_coho_counts = mean(jack_coho)) 
+
+steelhead <- seasonplot_week %>% 
+  gg_season(y = weekly_steelhead_counts,
+            pal = magma(10)) +
+  theme_dark() +
+  theme(axis.title = element_blank())
+
+coho <- seasonplot_week %>% 
+  gg_season(y = weekly_coho_counts,
+            pal = magma(10)) +
+  theme_dark() +
+  theme(axis.title = element_blank())
+
+jack_coho <- seasonplot_week %>% 
+  gg_season(y = weekly_jack_coho_counts,
+            pal = magma(10)) +
+  theme_dark() +
+  theme(axis.title = element_blank())
+
+steelhead + labs(subtitle = 'Steelhead') + 
+  (jack_coho + labs(subtitle = 'Jack Coho') + 
+     coho + labs(subtitle = 'Coho') +
+     plot_layout(ncol = 1)) +
+  plot_layout(guides = 'collect') +
+  plot_annotation(title = 'Species Counts at Willamette Falls (2001-2010)') &
+  theme(legend.position = 'bottom')
 ```
 
+
+## Tab 3: Annual counts by species
