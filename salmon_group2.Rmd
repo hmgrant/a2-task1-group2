@@ -25,13 +25,17 @@ library(viridis)
 ```
 
 # Overview {.tabset}
-  Here is an engaging image!
-  
-  Here is a brief summary!
+
+![**Willamette Falls as seen from overhead via a drone in July 2017. Photo:By Mrgadget51 - Own work, CC BY-SA 4.0*](Willamette.jpg)
+**Willamette Falls as seen from overhead via a drone in July 2017. Photo:By Mrgadget51 - Own work, CC BY-SA 4.0**
+
+The Niagara of the West - Willamette Falls is the largest falls in Oregon. The river was once filled with salmon and Pacific lamprey and for thousands of years this area was a significant fishing place for the Clackamas People. Close contact with early European fur traders had devastating effects on the Clackamas People and by 1851 nearly 97% of the Native people in this area had died from foreign diseases ([Lewis, 2014](https://ndnhistoryresearch.com/2014/12/15/clackamas-people-of-willamette-falls/#:~:text=The%20Clackamas%20People%20helped%20early,south%20into%20the%20Willamette%20Valley.&text=Willamette%20Falls%20was%20the%20main,or%20leap%20over%20the%20falls.)). 
+
+Since 1961, Oregon Department of Fish & Wildlife has recorded the monthly fish passage through Willamette Falls fishway.  Counts are conducted 24 hrs/day, 365 days/year using using video cameras and time lapsed video recorders at the main viewing window.
   
   Here is a map of the fish ladder location!
   
-  Here is a professionally formatted data citation!
+  **Data Citation:** Adult Passage Inventory Willamette Falls. Oregon Department of Fish & Wildlife, Columbia River DART (Data access in Real Time), 2000-2020. [http://www.cbr.washington.edu/dart/query/adult_graph_text](http://www.cbr.washington.edu/dart/query/adult_graph_text) 
 
 ## Tab 1: Original time series 
 
@@ -117,3 +121,34 @@ steelhead + labs(subtitle = 'Steelhead') +
 
 
 ## Tab 3: Annual counts by species
+
+```{r, warning=FALSE, message = FALSE}
+
+annual_ts <- read_csv(here("data","willamette_fish_passage.csv")) %>% 
+  clean_names() %>% 
+  select(coho, jack_coho, steelhead, date, temp_c) %>%
+  mutate(date = mdy(date))%>% 
+  as_tsibble(key = NULL, index = date)
+
+annual_counts <- annual_ts %>% 
+  index_by(yearly = ~year(.)) %>% 
+  summarize(count_coho = sum(coho, na.rm = TRUE),
+            count_jack = sum(jack_coho, na.rm = TRUE),
+            count_steelhead = sum(steelhead, na.rm = TRUE)) 
+
+ggplot(annual_counts)+
+  geom_line(aes(x = yearly, y = count_coho),
+            color = "cyan3")+
+  geom_line(aes(x = yearly, y = count_jack),
+            color = "darkgoldenrod1")+
+  geom_line(aes(x = yearly, y = count_steelhead),
+            color = "darkgreen")+
+  scale_x_continuous(breaks = c(2001:2010))+
+  labs(x = "Year", y = "Total adult passage")+
+  ggtitle(label = "Total Annual Passage by Species")+
+  geom_label(label = "Steelhead", x=2005.5, y=40000, color = "darkgreen") +
+  geom_label(label = "Jack-Coho", x=2009, y=5500, color = "darkgoldenrod1") +
+  geom_label(label = "Coho", x =2005, y = 8000, color = "cyan3")
+    
+```
+
