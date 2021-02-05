@@ -45,6 +45,7 @@ As shown in the figure below:
  *  The recorded number of Coho fish increased as time increased, with the most recorded Coho salmon in 2010.
  *  There is a constant trended in the recorded number of Jack Coho, except for a peak in late 2008. 
  *  All three fish seem to have a seasonal trend, where some months have more recorded salmon than others. For example, more Steelhead salmon are found during the Spring months. 
+ 
 ```{r,  message=FALSE, warning=FALSE}
 original_ts <- read_csv(here("data","willamette_fish_passage.csv")) %>% 
   clean_names() %>% 
@@ -78,8 +79,13 @@ static_steelhead <- original_ts %>%
   
 ```
 
-
 ## Tab 2: Seasonplots
+
+Major trends:
+
+  *   Jack Coho and Coho species are present between September through December, but not the rest of the year.
+  *   Steelhead are present almost year round, with most counts recorded in late spring. 
+  *   Jack Coho and Coho population counts peak in 2009 and 2010 respectively, while Steelhead population count peaks in 2002.
 
 ```{r, warning=FALSE, message = FALSE}
 seasonplot_ts <- read_csv(here("data","willamette_fish_passage.csv")) %>% 
@@ -118,7 +124,6 @@ steelhead + labs(subtitle = 'Steelhead') +
   plot_annotation(title = 'Species Counts at Willamette Falls (2001-2010)') &
   theme(legend.position = 'bottom')
 ```
-
 
 ## Tab 3: Annual counts by species
 
