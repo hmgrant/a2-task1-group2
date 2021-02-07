@@ -30,9 +30,9 @@ library(viridis)
 
 The Niagara of the West - Willamette Falls is the largest falls in Oregon. The river was once filled with salmon and Pacific lamprey and for thousands of years this area was a significant fishing place for the Clackamas People. Close contact with early European fur traders had devastating effects on the Clackamas People and by 1851 nearly 97% of the Native people in this area had died from foreign diseases ([Lewis, 2014](https://ndnhistoryresearch.com/2014/12/15/clackamas-people-of-willamette-falls/#:~:text=The%20Clackamas%20People%20helped%20early,south%20into%20the%20Willamette%20Valley.&text=Willamette%20Falls%20was%20the%20main,or%20leap%20over%20the%20falls.)). 
 
-Since 1961, Oregon Department of Fish & Wildlife has recorded the monthly fish passage through Willamette Falls fishway.  Counts are conducted 24 hrs/day, 365 days/year using using video cameras and time lapsed video recorders at the main viewing window.
+Industrialization of the area in the late 1800's also lead to reduced fish runs, thus a fish ladder was built in 1982 and later rebuilt in 1971 to help. The Oregon Department of Fish & Wildlife currently manages it and has recorded the monthly fish passage through Willamette Falls fishway.  Counts are conducted 24 hrs/day, 365 days/year using using video cameras and time lapsed video recorders at the main viewing window. The following report explores the adult passage of coho, jack-coho, and steelhead salmon through the Willamette Falls fish ladder using the data collected by Oregon Department of Fish & Wildlife. 
   
-  Here is a map of the fish ladder location!
+![*US Army Corps of Engineers - Portland District Website*](fish_ladder.jpg)
   
   **Data Citation:** Adult Passage Inventory Willamette Falls. Oregon Department of Fish & Wildlife, Columbia River DART (Data access in Real Time), 2000-2020. [http://www.cbr.washington.edu/dart/query/adult_graph_text](http://www.cbr.washington.edu/dart/query/adult_graph_text) 
 
@@ -126,6 +126,13 @@ steelhead + labs(subtitle = 'Steelhead') +
 
 ## Tab 3: Annual counts by species
 
+The annual total counts of fish passage for steelhead, coho, and jack-coho at Willamette Falls fish ladder is shown in Figure 3. The total annual counts shown below are from 2001-2010. Some of of the major trends include:
+
+  *  Steelhead are the most abundant of the three species to pass through the Willamette Falls fish ladder with counts ranging roughly between 20,000 - 40,000.
+  * Jack-coho are the least abundant of the three species with the annual totals for fish passage remaining below 3,000 from 2001-2010.
+  *  There was a large increase in annual abundance of Coho in 2009 & 2010 where counts went from ~4,000 to over 25,000.
+
+  
 ```{r, warning=FALSE, message = FALSE}
 
 annual_ts <- read_csv(here("data","willamette_fish_passage.csv")) %>% 
@@ -155,4 +162,4 @@ ggplot(annual_counts)+
   geom_label(label = "Coho", x =2005, y = 8000, color = "cyan3")
     
 ```
-
+**Figure 3.** Annual totals for fish passage for steelhead, coho, and jack-coho from 2001 to 2010.
