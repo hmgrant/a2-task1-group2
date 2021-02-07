@@ -5,13 +5,12 @@ author: "Haley Grant, Dina Arch, Rachel Rhodes"
 date: "2/1/2021"
 output:
   html_document:
-    code_folding: show
-    toc: true
-    css: style.css
+    code_folding: hide
+    css: 'style.css'
 ---
 
-```{r setup, include=FALSE, message=FALSE, warning=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 library(prettydoc)
 library(tidyverse)
 library(dplyr)
