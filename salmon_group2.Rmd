@@ -4,9 +4,8 @@ subtitle: "Group 2"
 author: "Haley Grant, Dina Arch, Rachel Rhodes"
 date: "2/1/2021"
 output:
-  html_document:
+  rmdformats::material:
     code_folding: hide
-    css: 'style.css'
 ---
 
 ```{r setup, include=FALSE}
@@ -21,6 +20,7 @@ library(tsibble)
 library(feasts)
 library(patchwork)
 library(viridis)
+library(rmdformats)
 ```
 
 # Overview {.tabset}
@@ -56,20 +56,20 @@ original_ts <- read_csv(here("data","willamette_fish_passage.csv")) %>%
 static_coho <- original_ts %>% 
   ggplot(aes(x = date, y = coho)) +
   labs(subtitle = 'Coho', x ='', y='') +
-  geom_line() +
-  theme_dark()
+  geom_line(color = "darkgreen") +
+  theme_minimal()
 
 static_jackcoho <- original_ts %>% 
   ggplot(aes(x = date, y = jack_coho)) +
   labs(subtitle = 'Jack Coho', x ='', y='') +
-  geom_line() +
-  theme_dark()
+  geom_line(color = "darkgreen") +
+  theme_minimal()
 
 static_steelhead <- original_ts %>% 
   ggplot(aes(x = date, y = steelhead)) +
   labs(subtitle = 'Steelhead', x ='', y='') +
-  geom_line() +
-  theme_dark()
+  geom_line(color = "darkgreen") +
+  theme_minimal()
 
 
 (static_coho / static_jackcoho / static_steelhead) +
